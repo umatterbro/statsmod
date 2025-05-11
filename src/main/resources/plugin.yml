@@ -8,3 +8,8 @@ commands:
     usage: /question
     permission: stats.question
     permission-message: you cannot do that
+  statsmod:
+    description: Statsmod stuff
+    usage: /statsmod
+    permission: stats.statsmod
+    permission-message: you cannot do that

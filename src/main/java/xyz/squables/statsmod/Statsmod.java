@@ -4,15 +4,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xyz.squables.statsmod.cmds.Command;
 import xyz.squables.statsmod.cmds.CommandRegistrar;
 import xyz.squables.statsmod.cmds.QuestionCommand;
+import xyz.squables.statsmod.cmds.StatsCommand;
+import xyz.squables.statsmod.cmds.tc.StatsCommandTabComplete;
+import xyz.squables.statsmod.cmds.tc.TabCompleteRegistrar;
 import xyz.squables.statsmod.events.EventRegistrar;
 import xyz.squables.statsmod.events.chat.AnswerChatSent;
 import xyz.squables.statsmod.events.custom.CustomEventRegistrar;
 import xyz.squables.statsmod.events.custom.all.*;
 
-/*
-    ALL CODE WRITTEN BY ELIOTT WOOTTON FOR MS. HEIDE STATS FINAL GRADE 12
-    ONLY PLAGIARIZED / AI CONTENT IS QUESTION TEMPLATES FOR QUESTIONS
-*/
+import java.util.Map;
 
 public final class Statsmod extends JavaPlugin {
     private static Statsmod instance;
@@ -109,8 +109,13 @@ public final class Statsmod extends JavaPlugin {
         );
 
         new CommandRegistrar(
-                new Command("question", new QuestionCommand())
+                new Command("question", new QuestionCommand()),
+                new Command("statsmod", new StatsCommand())
         );
+
+        new TabCompleteRegistrar(Map.ofEntries(
+                Map.entry("statsmod", new StatsCommandTabComplete())
+        ));
     }
 
     @Override

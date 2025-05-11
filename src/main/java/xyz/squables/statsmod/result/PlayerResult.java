@@ -5,6 +5,9 @@ import xyz.squables.statsmod.Util;
 import xyz.squables.statsmod.result.bad.DamageResult;
 import xyz.squables.statsmod.result.good.GiveDiamondResult;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class PlayerResult {
     public abstract void executeOn(Player p);
 
@@ -22,5 +25,13 @@ public abstract class PlayerResult {
 
     public static PlayerResult getRandomBad() {
         return _badPrs[Util.generateRandomInt(0, _badPrs.length)];
+    }
+
+    public static List<String> getAllNames() {
+        List<String> all = new ArrayList<>();
+        for(PlayerResult pr : _goodPrs) all.add(pr.getClass().getSimpleName());
+        for(PlayerResult pr : _badPrs) all.add(pr.getClass().getSimpleName());
+
+        return all;
     }
 }

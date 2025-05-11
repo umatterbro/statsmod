@@ -1,11 +1,9 @@
-package xyz.squables.statsmod.question;
+package xyz.squables.statsmod.question.types;
 
 import org.bukkit.entity.Player;
 import xyz.squables.statsmod.question.answer.Answers;
 import xyz.squables.statsmod.question.options.QuestionOptions;
 import xyz.squables.statsmod.question.options.variables.VariableType;
-import xyz.squables.statsmod.question.types.InverseTQuestion;
-import xyz.squables.statsmod.question.types.InverseZQuestion;
 
 import java.util.Random;
 
@@ -23,6 +21,19 @@ public abstract class Question<T extends QuestionOptions> {
         if(this.type.type == VariableType.DOUBLE) {
             this.answers = opts.generateAnswers(this.type, Double.class);
         }
+    }
+
+    public Question(QuestionType type, T opts) {
+        this.type = type;
+        this.options = opts;
+
+        if(this.type.type == VariableType.DOUBLE) {
+            this.answers = opts.generateAnswers(this.type, Double.class);
+        }
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
     public T getOptions() {
@@ -51,6 +62,7 @@ public abstract class Question<T extends QuestionOptions> {
         switch (qt) {
             case InverseT: return new InverseTQuestion();
             case InverseZ: return new InverseZQuestion();
+            case EventProb: return new EventProbQuestion();
         }
 
         return null;

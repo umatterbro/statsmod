@@ -2,19 +2,19 @@ package xyz.squables.statsmod.events.custom.all;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.TNTPrimeEvent;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
-import org.bukkit.event.raid.RaidTriggerEvent;
 import xyz.squables.statsmod.events.custom.CustomEvent;
 
-public class SheepDyeWoolCustomEvent extends CustomEvent<SheepDyeWoolEvent> {
-    public SheepDyeWoolCustomEvent() {
+public class TNTPrimeCustomEvent extends CustomEvent<TNTPrimeEvent> {
+    public TNTPrimeCustomEvent() {
         super(0.25);
     }
 
     @Override
     @EventHandler
-    public void handleEvent(SheepDyeWoolEvent e) {
-        Player p = e.getPlayer();
+    public void handleEvent(TNTPrimeEvent e) {
+        if(!(e.getPrimingEntity() instanceof Player p)) return;
         this.doLockCheck(p, e);
     }
 }

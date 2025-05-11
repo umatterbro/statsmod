@@ -2,19 +2,19 @@ package xyz.squables.statsmod.events.custom.all;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntityTameEvent;
+import org.bukkit.event.entity.EntityTargetEvent;
 import xyz.squables.statsmod.events.custom.CustomEvent;
 
-public class EntityTameCustomEvent extends CustomEvent<EntityTameEvent> {
-    public EntityTameCustomEvent() {
-        super(0.5);
+public class EntityTargetCustomEvent extends CustomEvent<EntityTargetEvent> {
+    public EntityTargetCustomEvent() {
+        super(0);
     }
 
     @Override
     @EventHandler
-    public void handleEvent(EntityTameEvent e) {
-        if(!(e.getOwner() instanceof Player p)) return;
-        this.doLockCheck(p, e);
+    public void handleEvent(EntityTargetEvent e) {
+        if(!(e.getTarget() instanceof Player p)) return;
+        this.doLightCheck(p, e);
     }
 }

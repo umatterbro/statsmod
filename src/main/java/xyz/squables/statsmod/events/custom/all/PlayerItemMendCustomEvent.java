@@ -5,8 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import xyz.squables.statsmod.events.custom.CustomEvent;
 
-public class PlayerItemDamageCustomEvent extends CustomEvent<PlayerItemConsumeEvent> {
-    public PlayerItemDamageCustomEvent() {
+public class PlayerItemMendCustomEvent extends CustomEvent<PlayerItemConsumeEvent> {
+    public PlayerItemMendCustomEvent() {
         super(0);
     }
 

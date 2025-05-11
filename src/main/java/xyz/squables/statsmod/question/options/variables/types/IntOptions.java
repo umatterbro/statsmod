@@ -1,11 +1,12 @@
 package xyz.squables.statsmod.question.options.variables.types;
 
-import javax.annotation.Nullable;
-import java.util.Optional;
+import xyz.squables.statsmod.Util;
+import xyz.squables.statsmod.question.options.variables.OperationType;
+import xyz.squables.statsmod.question.options.variables.VariableOptions;
 
-public class FloatOptions extends VariableOptions<Float> {
-    protected float min;
-    protected float max;
+public class IntOptions extends VariableOptions<Integer> {
+    protected int min;
+    protected int max;
 
     protected boolean useMin = false;
     protected boolean useMax = false;
@@ -13,7 +14,7 @@ public class FloatOptions extends VariableOptions<Float> {
     protected OperationType minOperationType;
     protected OperationType maxOperationType;
 
-    private void initialize(float min, float max, boolean useMin, boolean useMax, OperationType minOperationType, OperationType maxOperationType) {
+    private void initialize(int min, int max, boolean useMin, boolean useMax, OperationType minOperationType, OperationType maxOperationType) {
         this.min = min;
         this.max = max;
 
@@ -22,49 +23,71 @@ public class FloatOptions extends VariableOptions<Float> {
 
         this.minOperationType = minOperationType;
         this.maxOperationType = maxOperationType;
+
+        this.value = this.generateRandom();
     }
 
-    public float getMin() {
+    public int getMin() {
         return this.min;
     }
 
-    public float getMax() {
+    public int getMax() {
         return this.max;
     }
 
-    public FloatOptions(String variableName, float min, float max, OperationType minOperationType, OperationType maxOperationType) {
+    public IntOptions(String variableName, int min, int max, OperationType minOperationType, OperationType maxOperationType) {
         super(variableName);
         initialize(min, max, true, true, minOperationType, maxOperationType);
     }
 
-    public FloatOptions(String variableName, float min, float max, OperationType minOperationType) {
+    public IntOptions(String variableName, int min, int max, OperationType minOperationType) {
         super(variableName);
         initialize(min, max, true, true, minOperationType, OperationType.GREATER_THAN_OR_EQUAL);
     }
 
-    public FloatOptions(String variableName, float min, float max) {
+    public IntOptions(String variableName, int min, int max) {
         super(variableName);
         initialize(min, max, true, true, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
     }
 
-    public FloatOptions(String variableName, float min) {
+    public IntOptions(String variableName, int min) {
         super(variableName);
         initialize(min, 0, true, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
     }
 
-    public FloatOptions(String variableName) {
+    public IntOptions(String variableName) {
         super(variableName);
         initialize(0, 0, false, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
     }
 
+    public int generateRandom() {
+        int min = 0;
+        int max = 1000;
+
+        if(this.useMin) min = this.min;
+        if(this.useMax) max = this.max;
+
+        return Util.generateRandomInt(min, max);
+    }
+
     @Override
-    public void setValue(Float value) {
+    public void setValue(Integer value) {
         if(this.useMin) {
-            if(value < this.min) throw new IllegalArgumentException("value " + value + " is " + this.minOperationType.label + " " + this.min);
+            switch(this.minOperationType) {
+                case OperationType.LESS_THAN: if(value < this.min) throw new IllegalArgumentException("value " + value + " is " + this.minOperationType.label + " " + this.min); break;
+                case OperationType.LESS_THAN_OR_EQUAL: if(value <= this.min) throw new IllegalArgumentException("value " + value + " is " + this.minOperationType.label + " " + this.min); break;
+                case OperationType.NONE: break;
+                default: throw new IllegalArgumentException("illegal operation type " + this.minOperationType.label);
+            }
         }
 
         if(this.useMax) {
-            if(value > this.max) throw new IllegalArgumentException("value " + value + " is " + this.maxOperationType.label + " " + this.max);
+            switch(this.maxOperationType) {
+                case OperationType.GREATER_THAN: if(value > this.max) throw new IllegalArgumentException("value " + value + " is " + this.maxOperationType.label + " " + this.max); break;
+                case OperationType.GREATER_THAN_OR_EQUAL: if(value >= this.max) throw new IllegalArgumentException("value " + value + " is " + this.maxOperationType.label + " " + this.max); break;
+                case OperationType.NONE: break;
+                default: throw new IllegalArgumentException("illegal operation type " + this.maxOperationType.label);
+            }
         }
 
         this.value = value;

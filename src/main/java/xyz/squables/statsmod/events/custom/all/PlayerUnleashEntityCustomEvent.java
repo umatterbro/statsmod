@@ -2,19 +2,19 @@ package xyz.squables.statsmod.events.custom.all;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.player.PlayerUnleashEntityEvent;
 import xyz.squables.statsmod.events.custom.CustomEvent;
 
-public class PlayerToggleSprintCustomEvent extends CustomEvent<PlayerToggleSprintEvent> {
-    public PlayerToggleSprintCustomEvent() {
-        super(0);
+public class PlayerUnleashEntityCustomEvent extends CustomEvent<PlayerUnleashEntityEvent> {
+    public PlayerUnleashEntityCustomEvent() {
+        super(0.5);
     }
 
     @Override
     @EventHandler
-    public void handleEvent(PlayerToggleSprintEvent e) {
+    public void handleEvent(PlayerUnleashEntityEvent e) {
         Player p = e.getPlayer();
-        this.doLightCheck(p, e);
+        this.doLockCheck(p, e);
     }
 }

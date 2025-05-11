@@ -1,4 +1,4 @@
-package xyz.squables.statsmod.question;
+package xyz.squables.statsmod.question.types;
 
 import xyz.squables.statsmod.question.options.variables.VariableType;
 

@@ -1,4 +1,4 @@
-package xyz.squables.statsmod.question;
+package xyz.squables.statsmod.question.answer;
 
 import java.util.List;
 
@@ -15,6 +15,10 @@ public class Answers<T> {
 
     public List<T> getAnswerOptions() {
         return this.answers;
+    }
+
+    public T getCorrectAnswer() {
+        return this.correctAnswer;
     }
 
     public boolean isAnswerCorrect(T given) {

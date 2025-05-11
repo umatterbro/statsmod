@@ -3,18 +3,18 @@ package xyz.squables.statsmod.events.custom.all;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import xyz.squables.statsmod.events.custom.CustomEvent;
 
-public class PlayerLeashEntityCustomEvent extends CustomEvent<PlayerLeashEntityEvent> {
-    public PlayerLeashEntityCustomEvent() {
-        super(0.4);
+public class PlayerMoveCustomEvent extends CustomEvent<PlayerMoveEvent> {
+    public PlayerMoveCustomEvent() {
+        super(0);
     }
 
     @Override
     @EventHandler
-    public void handleEvent(PlayerLeashEntityEvent e) {
+    public void handleEvent(PlayerMoveEvent e) {
         Player p = e.getPlayer();
-        this.doLockCheck(p, e);
+        this.doLightCheck(p, e);
     }
 }

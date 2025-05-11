@@ -1,2 +1,4 @@
-package xyz.squables.statsmod.tasks;public class TaskRegistrar {
+package xyz.squables.statsmod.tasks;
+
+public class TaskRegistrar {
 }

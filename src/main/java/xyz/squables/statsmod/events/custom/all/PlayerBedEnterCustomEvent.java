@@ -2,18 +2,18 @@ package xyz.squables.statsmod.events.custom.all;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
+import org.bukkit.event.player.PlayerBedEnterEvent;
 import xyz.squables.statsmod.events.custom.CustomEvent;
 
-public class PlayerArmorStandManipulateCustomEvent extends CustomEvent<PlayerArmorStandManipulateEvent> {
-    public PlayerArmorStandManipulateCustomEvent() {
-        super(0.3);
+public class PlayerBedEnterCustomEvent extends CustomEvent<PlayerBedEnterEvent> {
+    public PlayerBedEnterCustomEvent() {
+        super(0.75);
     }
 
     @Override
     @EventHandler
-    public void handleEvent(PlayerArmorStandManipulateEvent e) {
+    public void handleEvent(PlayerBedEnterEvent e) {
         Player p = e.getPlayer();
         this.doLockCheck(p, e);
     }

@@ -2,19 +2,19 @@ package xyz.squables.statsmod.events.custom.all;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.raid.RaidTriggerEvent;
 import xyz.squables.statsmod.events.custom.CustomEvent;
 
-public class ProjectileHitCustomEvent extends CustomEvent<ProjectileHitEvent> {
-    public ProjectileHitCustomEvent() {
+public class RaidTriggerCustomEvent extends CustomEvent<RaidTriggerEvent> {
+    public RaidTriggerCustomEvent() {
         super(0);
     }
 
     @Override
     @EventHandler
-    public void handleEvent(ProjectileHitEvent e) {
-        if(!(e.getHitEntity() instanceof Player p)) return;
+    public void handleEvent(RaidTriggerEvent e) {
+        Player p = e.getPlayer();
         this.doLightCheck(p, e);
     }
 }

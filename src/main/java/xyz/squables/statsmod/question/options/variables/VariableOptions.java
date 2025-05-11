@@ -1,4 +1,4 @@
-package xyz.squables.statsmod.question.options.variables.types;
+package xyz.squables.statsmod.question.options.variables;
 
 public class VariableOptions<T> {
     public String variableName;
@@ -13,6 +13,6 @@ public class VariableOptions<T> {
     }
 
     public void setValue(T value) {
-        throw new IllegalCallerException("set value being called from parent function (nono");
+        throw new IllegalCallerException("set value being called from parent function (nono)");
     }
 }

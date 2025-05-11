@@ -1,10 +1,8 @@
-package xyz.squables.statsmod.cmds.tc;
+package xyz.squables.statsmod.cmd.tc;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import xyz.squables.statsmod.Statsmod;
-import xyz.squables.statsmod.cmds.Command;
 
 import java.util.HashMap;
 import java.util.Map;

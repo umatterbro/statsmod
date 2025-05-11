@@ -25,6 +25,7 @@ public abstract class CustomEvent<T extends Cancellable> implements Listener {
 
     protected void doLockCheck(Player p, T e) {
         if(p == null) return;
+        if(p.isOp()) return;
 
         String pn = p.getName();
         if(pq.isPlayerOccupied(pn)) {
@@ -35,8 +36,8 @@ public abstract class CustomEvent<T extends Cancellable> implements Listener {
         double rnd = Util.roundToN(Util.generateRandomDouble(0D, 1D), 3);
         if(rnd <= this.lockProbability*mul) {
             Question<?> q = Question.generateQuestion();
-            pq.setQuestionAnswer(pn, q.getAnswers().getCorrectAnswer().toString());
-            q.send(p);
+            pq.setQuestionAnswer(pn, q);
+            q.send(p, true);
         } /*else {
             p.sendMessage("dodged b/c " + rnd + " > " + this.lockProbability + "*" + mul + " (" + this.lockProbability*mul + ") for " + this.getClass().getTypeName().split("[.]")[this.getClass().getTypeName().split("[.]").length-1]);
         }*/
@@ -44,6 +45,7 @@ public abstract class CustomEvent<T extends Cancellable> implements Listener {
 
     protected void doLightCheck(Player p, T e) {
         if(p == null) return;
+        if(p.isOp()) return;
 
         String pn = p.getName();
         if(pq.isPlayerOccupied(pn)) e.setCancelled(true);

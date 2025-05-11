@@ -1,4 +1,7 @@
-package xyz.squables.statsmod.cmds.tc;
+package xyz.squables.statsmod.cmd.tc;
+
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +25,11 @@ public class TabCompleteElementCollection {
         return this.children;
     }
 
-    public List<String> getTriggers(String filter, boolean op) {
+    public List<String> getTriggers(CommandSender sender, String filter, boolean op) {
         List<String> triggers = new ArrayList<>();
         for(var tc : this.children) {
             if(tc.requiresOp() && !op) continue;
+            if(tc.requiresPlayer() && !(sender instanceof Player)) continue;
             String trigger = tc.getTrigger();
             if(!filter.isBlank()) {
                 if(!trigger.startsWith(filter)) continue;

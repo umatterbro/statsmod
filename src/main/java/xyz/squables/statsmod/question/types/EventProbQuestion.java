@@ -8,7 +8,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import xyz.squables.statsmod.Util;
 import xyz.squables.statsmod.question.options.EventProbOptions;
-import xyz.squables.statsmod.question.options.InverseTOptions;
 
 public class EventProbQuestion extends Question<EventProbOptions> {
     // this is a certified #chatgpt moment
@@ -20,10 +19,10 @@ public class EventProbQuestion extends Question<EventProbOptions> {
             "Liam attempts %d math problems and usually gets them right %d percent of the time. What is the likelihood he solves %d correctly? (round to 5th decimal place)",
             "Jasmine takes %d three-point shots and has a success rate of %d percent. What is the chance she scores %d times? (round to 5th decimal place)",
             "Ethan throws a dart at a bullseye %d times and hits it %d percent of the time. What is the probability he hits it %d times? (round to 5th decimal place)",
-            "Ava submits %d job applications and usually hears back from %d percent of them. What are the chances she hears back from %d? (round to 5th decimal place)",
+            "Ava submits %d job applications and usually hears back from %d percent of them. What are the chances she hears back from %d places? (round to 5th decimal place)",
             "Noah takes %d photos, his camera gets a clear shot %d percent of the time. What is the probability %d of his photos are clear? (round to 5th decimal place)",
-            "Olivia tries to solve %d puzzles with a success rate of %d percent. What is the probability she finishes exactly %d? (round to 5th decimal place)",
-            "Mason sends %d cold emails, with a response rate is 20%. What is the probability he gets %d responses? (round to 5th decimal place)",
+            "Olivia tries to solve %d puzzles with a success rate of %d percent. What is the probability she finishes exactly %d puzzles? (round to 5th decimal place)",
+            "Mason sends %d cold emails, with a response rate is %d percent. What is the probability he gets %d responses? (round to 5th decimal place)",
     };
 
     private String randomTemplate() {
@@ -31,20 +30,22 @@ public class EventProbQuestion extends Question<EventProbOptions> {
     }
 
     public EventProbQuestion() {
-        super(QuestionType.EventProb, new EventProbOptions());
+        super(QuestionType.EVENTPROB, new EventProbOptions());
         this.template = randomTemplate();
     }
 
     @Override
-    public void send(Player p) {
+    public void send(Player p, boolean useTextComponents) {
         EventProbOptions opts = ((EventProbOptions)this.getOptions());
 
         p.sendMessage(this.formatTemplate(opts.getTrialCount(), Math.round(opts.getChance()*100), opts.getSuccessfulTrialReq()));
         for(int i = 0; i < this.answers.getAnswerOptions().size(); i++) {
             var ans = this.answers.getAnswerOptions().get(i);
             TextComponent tc = new TextComponent(ChatColor.translateAlternateColorCodes('&', "&8[&l" + Util.intToColor(i) + (i+1) + "&r&8]: &f" + ans));
-            tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("(" + opts.getTrialCount() + "/" + opts.getSuccessfulTrialReq() + ")(" + opts.getChance() + ")^" + opts.getSuccessfulTrialReq() + "(" + (1-opts.getChance()) + ")^" + (opts.getTrialCount()-opts.getSuccessfulTrialReq()) + " ?= " + ans)));
-            tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/answer " + ans));
+            if(useTextComponents) {
+                tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("(" + opts.getTrialCount() + "/" + opts.getSuccessfulTrialReq() + ")(" + opts.getChance() + ")^" + opts.getSuccessfulTrialReq() + "(" + (1-opts.getChance()) + ")^" + (opts.getTrialCount()-opts.getSuccessfulTrialReq()) + " ?= " + ans)));
+                tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/answer " + ans));
+            }
             p.sendMessage(tc);
         }
     }

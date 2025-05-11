@@ -52,17 +52,21 @@ public abstract class Question<T extends QuestionOptions> {
         return String.format(this.template, args);
     }
 
-    public abstract void send(Player p);
+    public abstract void send(Player p, boolean useTextComponents);
 
     public static Question generateQuestion() {
         return _generateQuestion(QuestionType.values()[new Random().nextInt(QuestionType.values().length)]);
     }
 
+    public static Question generateQuestion(QuestionType qt) {
+        return _generateQuestion(qt);
+    }
+
     private static Question _generateQuestion(QuestionType qt) {
         switch (qt) {
-            case InverseT: return new InverseTQuestion();
-            case InverseZ: return new InverseZQuestion();
-            case EventProb: return new EventProbQuestion();
+            case INVERSET: return new InverseTQuestion();
+            case INVERSEZ: return new InverseZQuestion();
+            case EVENTPROB: return new EventProbQuestion();
         }
 
         return null;

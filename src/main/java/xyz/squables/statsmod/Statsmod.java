@@ -1,14 +1,14 @@
 package xyz.squables.statsmod;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.squables.statsmod.cmds.Command;
-import xyz.squables.statsmod.cmds.CommandRegistrar;
-import xyz.squables.statsmod.cmds.QuestionCommand;
-import xyz.squables.statsmod.cmds.StatsCommand;
-import xyz.squables.statsmod.cmds.tc.StatsCommandTabComplete;
-import xyz.squables.statsmod.cmds.tc.TabCompleteRegistrar;
+import xyz.squables.statsmod.cmd.Command;
+import xyz.squables.statsmod.cmd.CommandRegistrar;
+import xyz.squables.statsmod.cmd.cmds.StatsCommand;
+import xyz.squables.statsmod.cmd.tc.cmds.StatsCommandTabComplete;
+import xyz.squables.statsmod.cmd.tc.TabCompleteRegistrar;
 import xyz.squables.statsmod.events.EventRegistrar;
 import xyz.squables.statsmod.events.chat.AnswerChatSent;
+import xyz.squables.statsmod.events.chat.PlayerJoin;
 import xyz.squables.statsmod.events.custom.CustomEventRegistrar;
 import xyz.squables.statsmod.events.custom.all.*;
 
@@ -32,7 +32,8 @@ public final class Statsmod extends JavaPlugin {
         pq = new PlayerQuestions();
 
         new EventRegistrar(
-                new AnswerChatSent()
+                new AnswerChatSent(),
+                new PlayerJoin()
         );
 
         new CustomEventRegistrar(
@@ -109,13 +110,12 @@ public final class Statsmod extends JavaPlugin {
         );
 
         new CommandRegistrar(
-                new Command("question", new QuestionCommand()),
-                new Command("statsmod", new StatsCommand())
+                new Command("statsmod", new StatsCommand(), new StatsCommandTabComplete())
         );
 
-        new TabCompleteRegistrar(Map.ofEntries(
+        /*new TabCompleteRegistrar(Map.ofEntries(
                 Map.entry("statsmod", new StatsCommandTabComplete())
-        ));
+        ));*/
     }
 
     @Override

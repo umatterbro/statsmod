@@ -19,7 +19,7 @@ public class InverseZOptions extends QuestionOptions {
     protected DoubleOptions sd = new DoubleOptions("Standard Deviation", 5D, 10D, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
 
     public InverseZOptions() {
-        super(QuestionType.InverseZ);
+        super(QuestionType.INVERSEZ);
     }
 
     public double getArea() {

@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InverseTOptions extends QuestionOptions {
-    protected DoubleOptions area = new DoubleOptions("Area", 0D, 1D, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
+    protected DoubleOptions area = new DoubleOptions("Area", 0.001D, .999D, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
     protected IntOptions df = new IntOptions("Degrees of freedom", 0, 100, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
 
     public InverseTOptions() {
-        super(QuestionType.InverseT);
+        super(QuestionType.INVERSET);
     }
 
     public double getArea() {

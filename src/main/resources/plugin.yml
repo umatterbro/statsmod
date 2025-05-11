@@ -3,13 +3,9 @@ version: '1.0'
 main: xyz.squables.statsmod.Statsmod
 api-version: '1.21'
 commands:
-  question:
-    description: Gives a question
-    usage: /question
-    permission: stats.question
-    permission-message: you cannot do that
   statsmod:
     description: Statsmod stuff
     usage: /statsmod
+    aliases: [ sm ]
     permission: stats.statsmod
     permission-message: you cannot do that

@@ -1,11 +1,9 @@
 package xyz.squables.statsmod;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import xyz.squables.statsmod.question.types.QuestionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +26,29 @@ public class Util {
     }
 
     public static String intToColor(int n) {
-        switch(n) {
-            case 0: return ChatColor.translateAlternateColorCodes('&', "&c");
-            case 1: return ChatColor.translateAlternateColorCodes('&', "&6");
-            case 2: return ChatColor.translateAlternateColorCodes('&', "&e");
-            case 3: return ChatColor.translateAlternateColorCodes('&', "&a");
-            case 4: return ChatColor.translateAlternateColorCodes('&', "&9");
-            default: return ChatColor.translateAlternateColorCodes('&', "&r");
+        return switch (n) {
+            case 0 -> ChatColor.translateAlternateColorCodes('&', "&c");
+            case 1 -> ChatColor.translateAlternateColorCodes('&', "&6");
+            case 2 -> ChatColor.translateAlternateColorCodes('&', "&e");
+            case 3 -> ChatColor.translateAlternateColorCodes('&', "&a");
+            case 4 -> ChatColor.translateAlternateColorCodes('&', "&9");
+            default -> ChatColor.translateAlternateColorCodes('&', "&r");
+        };
+    }
+
+    public static List<String> getAllOnlineUsernames() {
+        List<String> usns = new ArrayList<>();
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            usns.add(p.getName());
         }
+
+        return usns;
+    }
+
+    public static List<String> getAllQuestionTypeNames() {
+        List<String> names = new ArrayList<>();
+        for(var q : QuestionType.values()) names.add(q.name().toLowerCase());
+        return names;
     }
 
     /*public static List<Location> availableSpawnLocationsWithinRadius(Player p, int radius) {

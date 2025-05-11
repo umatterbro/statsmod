@@ -19,7 +19,7 @@ public class EventProbOptions extends QuestionOptions {
     protected IntOptions st = new IntOptions("Successful Trials", 1, 3, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
 
     public EventProbOptions() {
-        super(QuestionType.EventProb);
+        super(QuestionType.EVENTPROB);
     }
 
     public double getChance() {

@@ -1,6 +1,6 @@
 package xyz.squables.statsmod.tasks;
 
-// TODO: tasks NOW
+// TODO: tasks verify me mfs
 public class Task {
 
 }

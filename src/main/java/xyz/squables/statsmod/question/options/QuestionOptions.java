@@ -10,5 +10,5 @@ public abstract class QuestionOptions {
         this.type = type;
     }
 
-    public abstract <T extends Number> Answers<T> generateAnswers(QuestionType qt, Class<T> tClass);
+    public abstract <T> Answers<T> generateAnswers(QuestionType qt, Class<T> tClass);
 }

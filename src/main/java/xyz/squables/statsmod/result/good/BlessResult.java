@@ -23,6 +23,6 @@ public class BlessResult extends PlayerResult {
 
     @Override
     public void executeOn(Player p) {
-        p.addPotionEffect(new PotionEffect(this.goodPotions[Util.generateRandomInt(0, this.goodPotions.length-1)], Util.generateRandomInt(30, 180)*20, Util.generateRandomInt(0, 3)));
+        p.addPotionEffect(new PotionEffect(this.goodPotions[Util.generateRandomInt(0, this.goodPotions.length)], Util.generateRandomInt(30, 180)*20, Util.generateRandomInt(0, 3)));
     }
 }

@@ -35,7 +35,7 @@ public class InverseZOptions extends QuestionOptions {
     }
 
     @Override
-    public <T extends Number> Answers<T> generateAnswers(QuestionType qt, Class<T> tClass) {
+    public <T> Answers<T> generateAnswers(QuestionType qt, Class<T> tClass) {
         if(qt.type == VariableType.DOUBLE) {
             double area = this.getArea();
             double mean = this.getMean();

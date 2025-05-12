@@ -41,7 +41,7 @@ public class EventProbOptions extends QuestionOptions {
     private int decimalPlace = 5;
 
     @Override
-    public <T extends Number> Answers<T> generateAnswers(QuestionType qt, Class<T> tClass) {
+    public <T> Answers<T> generateAnswers(QuestionType qt, Class<T> tClass) {
         if(qt.type == VariableType.DOUBLE) {
             double cs = this.getChance();
             double tc = this.getTrialCount();

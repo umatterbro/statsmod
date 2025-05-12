@@ -21,7 +21,7 @@ public class StatsCommandTabComplete implements TabCompleter {
                             )))
                     ))),
                     new TabCompleteElement("question", true, false, new TabCompleteElementCollection(List.of(
-                            new TabCompleteElement("get", true, true, new TabCompleteElementCollection(List.of(
+                            new TabCompleteElement("get", true, false, new TabCompleteElementCollection(List.of(
                                     TabCompleteElement.generateBlanks(Util.getAllOnlineUsernames(), true, false)
                             ))),
                             new TabCompleteElement("give", true, false, new TabCompleteElementCollection(List.of(

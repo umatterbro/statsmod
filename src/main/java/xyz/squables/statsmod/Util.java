@@ -51,6 +51,15 @@ public class Util {
         return names;
     }
 
+    public static String joinAndAddAnd(List<String> strs) {
+        List<String> newStrs = new ArrayList<>();
+        for(int i = 0; i < strs.size()-1; i++) {
+            newStrs.add(strs.get(i));
+        }
+
+        return String.join(", ", newStrs) + " and " + strs.getLast();
+    }
+
     /*public static List<Location> availableSpawnLocationsWithinRadius(Player p, int radius) {
         Location pl = p.getLocation();
         World pw = p.getWorld();

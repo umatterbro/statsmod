@@ -44,7 +44,7 @@ public class DoubleOptions extends VariableOptions<Double> {
         return Util.roundToN(this.value, this.roundTo);
     }
 
-    public double generateRandom() {
+    public Double generateRandom() {
         double min = 0;
         double max = 1000;
 

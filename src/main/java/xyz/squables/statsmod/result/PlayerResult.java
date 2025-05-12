@@ -3,6 +3,7 @@ package xyz.squables.statsmod.result;
 import org.bukkit.entity.Player;
 import xyz.squables.statsmod.Util;
 import xyz.squables.statsmod.result.bad.DamageResult;
+import xyz.squables.statsmod.result.bad.DebuffResult;
 import xyz.squables.statsmod.result.bad.ExplodeResult;
 import xyz.squables.statsmod.result.bad.LightningResult;
 import xyz.squables.statsmod.result.good.BlessResult;
@@ -22,7 +23,8 @@ public abstract class PlayerResult {
     private static final PlayerResult[] _badPrs = new PlayerResult[] {
             new DamageResult(),
             new LightningResult(),
-            new ExplodeResult()
+            new ExplodeResult(),
+            new DebuffResult()
     };
 
     public static PlayerResult getRandomGood() {

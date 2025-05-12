@@ -114,11 +114,6 @@ public class StatsCommand implements CommandExecutor {
                         var q = pq.getQuestion(pn);
                         q.send(((Player) sender), false);
                     } else {
-                        if(!(sender instanceof Player)) {
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou need to be a player to do that"));
-                            return true;
-                        }
-
                         Player p = ((Player) sender);
                         String pn = p.getName();
                         if(!pq.isPlayerOccupied(pn)) {

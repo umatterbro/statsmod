@@ -5,7 +5,8 @@ import xyz.squables.statsmod.question.options.variables.VariableType;
 public enum QuestionType {
     INVERSET(VariableType.DOUBLE),
     INVERSEZ(VariableType.DOUBLE),
-    EVENTPROB(VariableType.DOUBLE);
+    EVENTPROB(VariableType.DOUBLE),
+    VARIABLECOUNT(VariableType.INT);
 
     public final VariableType type;
     QuestionType(VariableType type) {

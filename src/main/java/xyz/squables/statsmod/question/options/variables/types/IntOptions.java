@@ -14,7 +14,9 @@ public class IntOptions extends VariableOptions<Integer> {
     protected OperationType minOperationType;
     protected OperationType maxOperationType;
 
-    private void initialize(int min, int max, boolean useMin, boolean useMax, OperationType minOperationType, OperationType maxOperationType) {
+    protected Integer[] presetOptions = null;
+
+    private void initialize(int min, int max, boolean useMin, boolean useMax, OperationType minOperationType, OperationType maxOperationType, Integer[] presetOptions) {
         this.min = min;
         this.max = max;
 
@@ -23,6 +25,8 @@ public class IntOptions extends VariableOptions<Integer> {
 
         this.minOperationType = minOperationType;
         this.maxOperationType = maxOperationType;
+
+        this.presetOptions = presetOptions;
 
         this.value = this.generateRandom();
     }
@@ -35,32 +39,39 @@ public class IntOptions extends VariableOptions<Integer> {
         return this.max;
     }
 
+    public IntOptions(String variableName, Integer[] presetOptions) {
+        super(variableName);
+        initialize(0, 0, false, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL, presetOptions);
+    }
+
     public IntOptions(String variableName, int min, int max, OperationType minOperationType, OperationType maxOperationType) {
         super(variableName);
-        initialize(min, max, true, true, minOperationType, maxOperationType);
+        initialize(min, max, true, true, minOperationType, maxOperationType, null);
     }
 
     public IntOptions(String variableName, int min, int max, OperationType minOperationType) {
         super(variableName);
-        initialize(min, max, true, true, minOperationType, OperationType.GREATER_THAN_OR_EQUAL);
+        initialize(min, max, true, true, minOperationType, OperationType.GREATER_THAN_OR_EQUAL, null);
     }
 
     public IntOptions(String variableName, int min, int max) {
         super(variableName);
-        initialize(min, max, true, true, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
+        initialize(min, max, true, true, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL, null);
     }
 
     public IntOptions(String variableName, int min) {
         super(variableName);
-        initialize(min, 0, true, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
+        initialize(min, 0, true, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL, null);
     }
 
     public IntOptions(String variableName) {
         super(variableName);
-        initialize(0, 0, false, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL);
+        initialize(0, 0, false, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL, null);
     }
 
-    public int generateRandom() {
+    public Integer generateRandom() {
+        if(this.presetOptions != null) return this.presetOptions[Util.generateRandomInt(0, this.presetOptions.length)];
+
         int min = 0;
         int max = 1000;
 

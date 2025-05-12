@@ -1,6 +1,6 @@
 package xyz.squables.statsmod.question.options.variables;
 
-public class VariableOptions<T> {
+public abstract class VariableOptions<T> {
     public String variableName;
     protected T value;
 
@@ -15,4 +15,6 @@ public class VariableOptions<T> {
     public void setValue(T value) {
         throw new IllegalCallerException("set value being called from parent function (nono)");
     }
+
+    public abstract T generateRandom();
 }

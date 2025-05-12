@@ -1,5 +1,7 @@
 package xyz.squables.statsmod;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.squables.statsmod.cmd.Command;
 import xyz.squables.statsmod.cmd.CommandRegistrar;
@@ -120,6 +122,12 @@ public final class Statsmod extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            String pn = p.getName();
+            if(pq.isPlayerOccupied(pn)) {
+                pq.clearMap(pn);
+                p.sendMessage("you've been released...");
+            }
+        }
     }
 }

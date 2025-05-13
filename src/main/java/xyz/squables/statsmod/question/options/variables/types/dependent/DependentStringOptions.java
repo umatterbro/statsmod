@@ -32,11 +32,6 @@ public class DependentStringOptions extends DependentVariableOptions<String> {
     }
 
     @Override
-    public List<String> generateFrom(Object... input) {
-        throw new NotImplementedException("uhhh nah");
-    }
-
-    @Override
     public List<String> generateAmount(int amount) {
         List<String> opts = new ArrayList<>();
 

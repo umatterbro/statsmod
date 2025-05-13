@@ -1,5 +1,6 @@
 package xyz.squables.statsmod.events.chat;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +21,13 @@ public class AnswerChatSent implements Listener {
         String[] args = e.getMessage().split(" ");
         if(args.length == 1) return;
 
-        String ans = args[1];
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < args.length; i++) {
+            if(i == args.length-1) sb.append(args[i]);
+            else sb.append(args[i]).append(" ");
+        }
+
+        String ans = sb.toString();
         Question<?> trueAns = pq.getQuestion(p.getName());
 
         if(!pq.isPlayerOccupied(p.getName())) return;

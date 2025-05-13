@@ -6,7 +6,8 @@ public enum QuestionType {
     INVERSET(VariableType.DOUBLE),
     INVERSEZ(VariableType.DOUBLE),
     EVENTPROB(VariableType.DOUBLE),
-    VARIABLECOUNT(VariableType.INT);
+    VARIABLECOUNT(VariableType.INT),
+    PERCENTILEOFPOPULATION(VariableType.STRING);
 
     public final VariableType type;
     QuestionType(VariableType type) {

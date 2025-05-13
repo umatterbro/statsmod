@@ -1,4 +1,4 @@
-package xyz.squables.statsmod.question.types.chp1;
+package xyz.squables.statsmod.question.types.chapters.chp1;
 
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -7,17 +7,15 @@ import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import xyz.squables.statsmod.Util;
-import xyz.squables.statsmod.question.answer.Answers;
-import xyz.squables.statsmod.question.options.chp1.VariableCountOptions;
+import xyz.squables.statsmod.question.options.chapters.chp1.VariableCountOptions;
 import xyz.squables.statsmod.question.options.variables.types.IntOptions;
-import xyz.squables.statsmod.question.options.variables.types.StringOptions;
 import xyz.squables.statsmod.question.options.variables.types.dependent.DependentStringOptions;
 import xyz.squables.statsmod.question.types.Question;
 import xyz.squables.statsmod.question.types.QuestionType;
 
-import java.util.ArrayList;
-import java.util.List;
-
+// reference #6
+// You measure the age (years), weight (pounds), and marital status (single, married, divorced, or widowed)
+// of 1400 women. How many variables did you measure?
 public class VariableCountQuestion extends Question<VariableCountOptions> {
     // this is a certified #chatgpt moment
     // only used AI for this because im too lazy to think of examples :(
@@ -44,8 +42,6 @@ public class VariableCountQuestion extends Question<VariableCountOptions> {
 
     @Override
     public void send(Player p, boolean useTextComponents) {
-        VariableCountOptions opts = ((VariableCountOptions)this.getOptions());
-
         String vars = Util.joinAndAddAnd(variables.generateAmount(((int) this.answers.getCorrectAnswer())));
         p.sendMessage(this.formatTemplate(vars, personCount.generateRandom()));
         for(int i = 0; i < this.answers.getAnswerOptions().size(); i++) {

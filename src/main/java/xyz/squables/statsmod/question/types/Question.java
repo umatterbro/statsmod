@@ -5,7 +5,8 @@ import org.bukkit.entity.Player;
 import xyz.squables.statsmod.question.answer.Answers;
 import xyz.squables.statsmod.question.options.QuestionOptions;
 import xyz.squables.statsmod.question.options.variables.VariableType;
-import xyz.squables.statsmod.question.types.chp1.VariableCountQuestion;
+import xyz.squables.statsmod.question.types.chapters.chp1.VariableCountQuestion;
+import xyz.squables.statsmod.question.types.chapters.chp2.PercentileOfPopulationQuestion;
 
 import java.util.Random;
 
@@ -15,7 +16,7 @@ public abstract class Question<T extends QuestionOptions> {
     protected Answers answers;
     protected String template;
 
-    public Question(QuestionType type, T opts, String template) {
+    private void initialize(QuestionType type, T opts, String template) {
         this.type = type;
         this.options = opts;
         this.template = template;
@@ -24,34 +25,23 @@ public abstract class Question<T extends QuestionOptions> {
             this.answers = opts.generateAnswers(this.type, Double.class);
         } else if(this.type.type == VariableType.INT) {
             this.answers = opts.generateAnswers(this.type, Integer.class);
+        } else if(this.type.type == VariableType.STRING) {
+            this.answers = opts.generateAnswers(this.type, String.class);
         } else {
             throw new NotImplementedException(this.type.type.name() + " has no VariableType counterpart in answer generation");
         }
+    }
+
+    public Question(QuestionType type, T opts, String template) {
+        this.initialize(type, opts, template);
     }
 
     public Question(QuestionType type, T opts) {
-        this.type = type;
-        this.options = opts;
-
-        if(this.type.type == VariableType.DOUBLE) {
-            this.answers = opts.generateAnswers(this.type, Double.class);
-        } else if(this.type.type == VariableType.INT) {
-            this.answers = opts.generateAnswers(this.type, Integer.class);
-        } else {
-            throw new NotImplementedException(this.type.type.name() + " has no VariableType counterpart in answer generation");
-        }
-    }
-
-    public void setTemplate(String template) {
-        this.template = template;
+        this.initialize(type, opts, null);
     }
 
     public T getOptions() {
         return this.options;
-    }
-
-    public String getCorrectAnswer() {
-        return this.answers.getCorrectAnswer().toString();
     }
 
     public Answers getAnswers() {
@@ -78,8 +68,9 @@ public abstract class Question<T extends QuestionOptions> {
             case INVERSEZ: return new InverseZQuestion();
             case EVENTPROB: return new EventProbQuestion();
             case VARIABLECOUNT: return new VariableCountQuestion();
+            case PERCENTILEOFPOPULATION: return new PercentileOfPopulationQuestion();
         }
 
-        return null;
+        throw new NotImplementedException("no case set for question type " + qt.name());
     }
 }

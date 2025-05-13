@@ -1,4 +1,4 @@
-package xyz.squables.statsmod.question.options.chp1;
+package xyz.squables.statsmod.question.options.chapters.chp1;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Bukkit;
@@ -7,7 +7,6 @@ import xyz.squables.statsmod.question.answer.Answers;
 import xyz.squables.statsmod.question.options.QuestionOptions;
 import xyz.squables.statsmod.question.options.variables.VariableType;
 import xyz.squables.statsmod.question.options.variables.types.IntOptions;
-import xyz.squables.statsmod.question.options.variables.types.StringOptions;
 import xyz.squables.statsmod.question.options.variables.types.dependent.DependentIntOptions;
 import xyz.squables.statsmod.question.types.QuestionType;
 
@@ -30,7 +29,7 @@ public class VariableCountOptions extends QuestionOptions {
         if(qt.type == VariableType.INT) {
             int vc = variableCount.generateRandom();
             DependentIntOptions ans = new DependentIntOptions("Answers", vc);
-            Bukkit.getConsoleSender().sendMessage("got answer " + vc);
+            Bukkit.getConsoleSender().sendMessage("got answer: " + vc);
 
             List<Integer> fakeAnswers = ans.generateFrom(-vc, Util.generateRandomInt(-4, -2), Util.generateRandomInt(1, 3), vc);
             List<T> allAnswers = new ArrayList<>();

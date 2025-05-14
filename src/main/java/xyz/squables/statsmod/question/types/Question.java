@@ -7,6 +7,8 @@ import xyz.squables.statsmod.question.options.QuestionOptions;
 import xyz.squables.statsmod.question.options.variables.VariableType;
 import xyz.squables.statsmod.question.types.chapters.chp1.VariableCountQuestion;
 import xyz.squables.statsmod.question.types.chapters.chp2.PercentileOfPopulationQuestion;
+import xyz.squables.statsmod.question.types.chapters.chp3.LSLRPredictQuestion;
+import xyz.squables.statsmod.question.types.chapters.chp4.SRSRandomSelectionQuestion;
 
 import java.util.Random;
 
@@ -69,6 +71,8 @@ public abstract class Question<T extends QuestionOptions> {
             case EVENTPROB: return new EventProbQuestion();
             case VARIABLECOUNT: return new VariableCountQuestion();
             case PERCENTILEOFPOPULATION: return new PercentileOfPopulationQuestion();
+            case LSLRPREDICT: return new LSLRPredictQuestion();
+            case SRSRANDOMSELECTION: return new SRSRandomSelectionQuestion();
         }
 
         throw new NotImplementedException("no case set for question type " + qt.name());

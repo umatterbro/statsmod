@@ -4,6 +4,9 @@ import xyz.squables.statsmod.Util;
 import xyz.squables.statsmod.question.options.variables.OperationType;
 import xyz.squables.statsmod.question.options.variables.VariableOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IntOptions extends VariableOptions<Integer> {
     protected int min;
     protected int max;
@@ -69,11 +72,14 @@ public class IntOptions extends VariableOptions<Integer> {
         initialize(0, 0, false, false, OperationType.LESS_THAN_OR_EQUAL, OperationType.GREATER_THAN_OR_EQUAL, null);
     }
 
+    private final int _min = 0;
+    private final int _max = 1000;
+
     public Integer generateRandom() {
         if(this.presetOptions != null) return this.presetOptions[Util.generateRandomInt(0, this.presetOptions.length)];
 
-        int min = 0;
-        int max = 1000;
+        int min = _min;
+        int max = _max;
 
         if(this.useMin) min = this.min;
         if(this.useMax) max = this.max;

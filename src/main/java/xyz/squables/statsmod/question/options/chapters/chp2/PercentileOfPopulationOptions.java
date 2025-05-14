@@ -25,8 +25,8 @@ public class PercentileOfPopulationOptions extends QuestionOptions {
         super(QuestionType.VARIABLECOUNT);
     }
 
-    protected IntOptions percentile = new IntOptions("Percentile", 25, 75);
-    protected String[] answerTemplates = new String[]{
+    protected final IntOptions percentile = new IntOptions("Percentile", 25, 75);
+    protected final String[] answerTemplates = new String[]{
             "%d percent of the population scores are above x",
             "%d percent of the population scores equal x",
             "x is %d percent of the population median",
@@ -40,17 +40,16 @@ public class PercentileOfPopulationOptions extends QuestionOptions {
             int rPerc = Math.abs(100-perc);
 
             List<T> answers = new ArrayList<>();
-
             for(String s : answerTemplates) {
                 answers.add(tClass.cast(String.format(s, perc)));
             }
 
             String correct = rPerc + " percent of the population scores are above x";
-            Collections.shuffle(answers);
             Bukkit.getConsoleSender().sendMessage("got answer: " + correct);
 
             T cc = tClass.cast(correct);
-            answers.add(Util.generateRandomInt(0, answers.size()), cc);
+            answers.addFirst(cc);
+            Collections.shuffle(answers);
             return new PercentileOfPopulationAnswers<>(answers, cc, perc);
         } else {
             throw new NotImplementedException("nope");

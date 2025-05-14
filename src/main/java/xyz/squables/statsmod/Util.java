@@ -60,6 +60,75 @@ public class Util {
         return String.join(", ", newStrs) + " and " + strs.getLast();
     }
 
+    public static <T> List<T> generateAmountNoDupes(T[] original, int amount) {
+        if(original.length - 1 >= amount) throw new IllegalArgumentException("amount cannot be greater than the size of the given array");
+
+        List<T> ret = new ArrayList<>();
+        for(int i = 0; i < amount; i++) {
+            while(true) {
+                T obj = original[Util.generateRandomInt(0, original.length)];
+                if(ret.contains(obj)) continue;
+                ret.add(obj);
+                break;
+            }
+        }
+
+        return ret;
+    }
+
+    public static <T> List<T> generateAmountNoDupes(List<T> original, int amount) {
+        if(original.size() - 1 >= amount) throw new IllegalArgumentException("amount cannot be greater than the size of the given array");
+
+        List<T> ret = new ArrayList<>();
+        for(int i = 0; i < amount; i++) {
+            while(true) {
+                T obj = original.get(Util.generateRandomInt(0, original.size()));
+                if(ret.contains(obj)) continue;
+                ret.add(obj);
+                break;
+            }
+        }
+
+        return ret;
+    }
+
+    public static List<Integer> generateRandomDigits(int amount) {
+        List<Integer> ints = new ArrayList<>();
+        for(int i = 0; i < amount; i++) ints.add(Util.generateRandomInt(10001, 99999));
+        return ints;
+    }
+
+    public static List<Integer> stringListToIntList(List<String> strs) {
+        List<Integer> nums = new ArrayList<>();
+        for(String s : strs) nums.add(Integer.valueOf(s));
+        return nums;
+    }
+
+    public static <T extends Number> List<String> numberGenericListToStringList(List<T> nums) {
+        List<String> strs = new ArrayList<>();
+        for(T i : nums) strs.add(String.valueOf(i));
+        return strs;
+    }
+
+    public static List<String> splitInto(String str, int pieceSize, boolean appendExtra) {
+        int strLen = str.length();
+        //if (strLen % pieceSize != 0) throw new IllegalArgumentException("length of str must be divisible by pieceSize (" + strLen + " % " + pieceSize + " = " + strLen % pieceSize + ")");
+
+        List<String> splits = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        for (int i = 0; i < strLen; i++) {
+            current.append(str.charAt(i));
+            if ((i+1) % pieceSize == 0 && i != 0) {
+                splits.add(current.toString());
+                current = new StringBuilder();
+            }
+        }
+
+        if(!current.isEmpty() && appendExtra) splits.add(current.toString());
+
+        return splits;
+    }
+
     /*public static List<Location> availableSpawnLocationsWithinRadius(Player p, int radius) {
         Location pl = p.getLocation();
         World pw = p.getWorld();

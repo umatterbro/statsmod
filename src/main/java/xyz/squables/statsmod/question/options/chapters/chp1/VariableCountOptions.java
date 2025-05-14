@@ -11,6 +11,7 @@ import xyz.squables.statsmod.question.options.variables.types.dependent.Dependen
 import xyz.squables.statsmod.question.types.QuestionType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 // reference #6
@@ -18,7 +19,7 @@ import java.util.List;
 // of 1400 women. How many variables did you measure?
 
 public class VariableCountOptions extends QuestionOptions {
-    protected IntOptions variableCount = new IntOptions("Variable count", 3, 6);
+    protected final IntOptions variableCount = new IntOptions("Variable count", 3, 6);
 
     public VariableCountOptions() {
         super(QuestionType.VARIABLECOUNT);
@@ -32,15 +33,16 @@ public class VariableCountOptions extends QuestionOptions {
             Bukkit.getConsoleSender().sendMessage("got answer: " + vc);
 
             List<Integer> fakeAnswers = ans.generateFrom(-vc, Util.generateRandomInt(-4, -2), Util.generateRandomInt(1, 3), vc);
-            List<T> allAnswers = new ArrayList<>();
+            List<T> answers = new ArrayList<>();
 
             for(int i : fakeAnswers) {
-                allAnswers.add(tClass.cast(i));
+                answers.add(tClass.cast(i));
             }
 
             T vcc = tClass.cast(vc);
-            allAnswers.add(Util.generateRandomInt(0, fakeAnswers.size()), vcc);
-            return new Answers<>(allAnswers, vcc);
+            answers.addFirst(vcc);
+            Collections.shuffle(answers);
+            return new Answers<>(answers, vcc);
         } else {
             throw new NotImplementedException("nope");
         }
